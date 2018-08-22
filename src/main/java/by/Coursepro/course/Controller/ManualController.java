@@ -29,8 +29,8 @@ public class ManualController {
     private final CloudStorageService cloudStorageService;
     private final CategoriesService categoriesService;
 
-    @GetMapping
-    public List<PublicInfoDto> getNews() {
+    @GetMapping("/getAll")
+    public List<PublicInfoDto> getInstructions() {
         return this.instructionService.getInstructions();
     }
 

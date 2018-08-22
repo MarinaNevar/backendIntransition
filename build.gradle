@@ -45,6 +45,7 @@ dependencies {
 	runtime 'org.apache.tomcat.embed:tomcat-embed-jasper:8.5.20'
 	runtime 'javax.servlet:jstl:1.2'
 	compile('javax.xml.bind:jaxb-api:2.3.0')
+	compile group: 'org.hibernate', name: 'hibernate-search-orm', version: '5.10.3.Final'
 	compile group: 'org.json', name: 'json', version: '20180130'
 	compile("org.springframework.security:spring-security-jwt")
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
