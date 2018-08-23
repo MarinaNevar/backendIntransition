@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RequestMapping(value = "/instructions", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class ManualController {
@@ -41,6 +41,11 @@ public class ManualController {
     @PostMapping("/addImageToPost")
     public String addImageToPost(@RequestParam("file") MultipartFile image) {
         return this.cloudStorageService.uploadImage(image);
+    }
+
+    @GetMapping("/getedit/{id}")
+    public void getedit(@RequestBody long id){
+        this.instructionService.getInstructionByUserId(id);
     }
 
     @PostMapping("/edit")

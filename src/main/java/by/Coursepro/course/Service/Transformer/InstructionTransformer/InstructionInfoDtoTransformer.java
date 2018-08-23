@@ -17,7 +17,6 @@ public class InstructionInfoDtoTransformer {
         instructionInfo.setId(instruction.getId());
         instructionInfo.setDescription(instruction.getDescription());
         instructionInfo.setName(instruction.getName());
-        instructionInfo.setText(instruction.getText());
         instructionInfo.setPublishDate(instruction.getPublishDate());
         instructionInfo.setAuthorName(instruction.getPublishDate());
         instructionInfo.setValue_rating(instruction.getRatingValue());

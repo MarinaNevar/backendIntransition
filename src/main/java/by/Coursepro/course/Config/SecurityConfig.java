@@ -25,12 +25,11 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 @Configuration
 @EnableWebSecurity
-@EnableOAuth2Sso
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] allowedUrlsForPost = new String[]{ "/auth/login","/registration/add" };
+    private static final String[] allowedUrlsForPost = new String[]{ "/auth/**","/instructions/**" };
 
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
     private final UserDetailsService userDetailsService;
@@ -75,6 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(final WebSecurity web) throws Exception {
         web.ignoring()
+                .antMatchers(HttpMethod.GET, allowedUrlsForPost)
                 .antMatchers(HttpMethod.POST, allowedUrlsForPost)
                 .antMatchers(HttpMethod.OPTIONS, "/**");
     }

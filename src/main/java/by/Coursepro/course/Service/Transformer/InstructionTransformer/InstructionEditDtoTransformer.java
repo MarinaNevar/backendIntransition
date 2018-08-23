@@ -17,7 +17,6 @@ public class InstructionEditDtoTransformer {
         instr.setName(publicInfoDto.getInstructionInfoDto().getName());
         instr.setDescription(publicInfoDto.getInstructionInfoDto().getDescription());
         instr.setCategories(publicInfoDto.getCategories());
-        instr.setText(publicInfoDto.getInstructionInfoDto().getText());
         return instr;
     }
 }

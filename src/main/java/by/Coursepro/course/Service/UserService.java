@@ -151,7 +151,7 @@ public class UserService {
 
     private void setDefaultSettings(User user) {
         encoder(user);
-        user.setIsActive(false);
+        user.setIsActive(true);
         user.setBlocked(false);
         user.setDeleted(false);
         user.setLanguage(languageRepository.findById((long)1));

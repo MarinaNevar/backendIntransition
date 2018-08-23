@@ -35,10 +35,10 @@ public class Instruction {
     @Column(name = "description")
     private String description;
 
-    @NotNull
-    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
-    @Column(name = "text")
-    private String text;
+//    @NotNull
+//    @Field(index = Index.YES, analyze = Analyze.YES, store = Store.NO)
+//    @Column(name = "text")
+//    private String text;
 
     @Column(name = "image")
     private String userImage;
@@ -83,7 +83,6 @@ public class Instruction {
     public Instruction(String name, String description, String text,String author, Float ratingValue) {
         this.name = name;
         this.description = description;
-        this.text = text;
         this.ratingValue = ratingValue;
         this.author=author;
         this.publishDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));

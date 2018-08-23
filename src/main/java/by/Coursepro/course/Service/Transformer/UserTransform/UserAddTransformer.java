@@ -11,6 +11,8 @@ public class UserAddTransformer  {
 
     public User makeModel(UserAddDto userAddDTO){
     User user = new User();
+    user.setFirstName(userAddDTO.getFirstName());
+    user.setLastName(userAddDTO.getLastName());
     user.setUsername(userAddDTO.getUsername());
     user.setPassword(userAddDTO.getPassword());
     user.setEmail(userAddDTO.getEmail());

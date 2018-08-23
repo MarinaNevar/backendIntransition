@@ -27,7 +27,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AuthService {
     private final UserRepository userRepository;
-    private final AuthUserTransformer authUserTransformer;
+    private final UserService userService;
     private final AuthenticationHelper authenticationHelper;
     private final AuthenticationManager authenticationManager;
 
@@ -36,42 +36,40 @@ public class AuthService {
         try {
             String username = Optional.ofNullable(loginRequestDto.getUsername())
                     .orElseThrow(() -> new BadCredentialsException("Username should be passed."));
-
             String password = Optional.ofNullable(loginRequestDto.getPassword())
                     .orElseThrow(() -> new BadCredentialsException("Password should be passed."));
-
             UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username,
                     password);
-
-            // Try to authenticate with this token
+            if(userService.uniqueUsername(username)) {
+                return new LoginResponseDto(null, new ErrorDto(Abbreviation.ERROR, Abbreviation.ERROR_UNIQUE_USERNAME),
+                        null);
+            }
+            if (this.userService.userIsDeleted(loginRequestDto.getUsername())) {
+                return new LoginResponseDto(null, new ErrorDto(Abbreviation.ERROR, Abbreviation.ERROR_USER_DELETED),
+                        null);
+            }
+            if (!this.userService.userIsActive(loginRequestDto.getUsername())) {
+                return new LoginResponseDto(null, new ErrorDto(Abbreviation.ERROR, Abbreviation.ERROR_USER_ISNT_ACTIVE),
+                        null);
+            }
+            if (this.userService.userIsBlocked(loginRequestDto.getUsername())) {
+                return new LoginResponseDto(null, new ErrorDto(Abbreviation.ERROR, Abbreviation.ERROR_USER_BLOCKED),
+                        null);
+            }
             final Authentication authResult = this.authenticationManager.authenticate(authRequest);
-
-            // Set generated JWT token to response header
             if (authResult.isAuthenticated()) {
                 JwtUserDetails userDetails = (JwtUserDetails) authResult.getPrincipal();
-
-                Optional<User> user = userRepository.findById(userDetails.getId());
-                if (Objects.isNull(user)) {
-                    throw new JsonException("User not exist in system.");
-                }
-
+                User user = userRepository.findById((long)userDetails.getId());
                 String token = this.authenticationHelper.generateToken(userDetails.getId());
-
-                return new LoginResponseDto(token,  new ErrorDto(Abbreviation.SUCCESS_AUTHENTICATION, Abbreviation.SUCCESS), user.get() );
+                return new LoginResponseDto(token,
+                        new ErrorDto(Abbreviation.SUCCESS, Abbreviation.SUCCESS_AUTHENTICATION),
+                        user);
             } else {
                 throw new JsonException("Authentication failed.");
             }
-
         } catch (BadCredentialsException exception) {
-            return new LoginResponseDto(null, new ErrorDto(Abbreviation.ERROR, Abbreviation.ERROR_INVALID_PARAMETRS), null);
+            return new LoginResponseDto(null, new ErrorDto(Abbreviation.ERROR, Abbreviation.ERROR_INVALID_PARAMETRS),
+                    null);
         }
-    }
-
-    @Transactional(readOnly = true)
-    public AuthUserDto getMe() {
-        Authentication authentication = SecurityHelper.getAuthenticationWithCheck();
-        User byUsername = userRepository.findByUsername(authentication.getName());
-
-        return authUserTransformer.makeDto(byUsername);
     }
 }

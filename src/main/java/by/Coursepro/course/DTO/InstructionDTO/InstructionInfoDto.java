@@ -9,7 +9,6 @@ public class InstructionInfoDto {
     private Long id;
     private String name;
     private String description;
-    private String text;
     private String publishDate;
     private String userImage;
     private long id_user;

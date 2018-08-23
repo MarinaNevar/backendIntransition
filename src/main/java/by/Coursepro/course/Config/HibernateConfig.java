@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManager;
 
-@EnableAutoConfiguration
 @Configuration
+@EnableAutoConfiguration
 public class HibernateConfig {
 
     private final EntityManager entityManager;

@@ -19,7 +19,7 @@ public class SearchService {
     private final EntityManager entityManager;
 @Autowired
     public SearchService(EntityManager entityManager) {
-        super();
+         super();
         this.entityManager = entityManager;
     }
 
