@@ -1,21 +1,27 @@
 package by.Coursepro.course.Service;
 
 import by.Coursepro.course.Entity.Instruction;
-import lombok.RequiredArgsConstructor;
 import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
-public class SearchService {
 
+public class SearchService {
+@Autowired
     private final EntityManager entityManager;
+@Autowired
+    public SearchService(EntityManager entityManager) {
+        super();
+        this.entityManager = entityManager;
+    }
 
     public void fullTextInit(){
         try {
@@ -25,6 +31,7 @@ public class SearchService {
             e.printStackTrace();
         }
     }
+    @Transactional
     public List<Instruction> fuzzySearch(String searchTerm){
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
         QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder().forEntity(Instruction.class).get();
