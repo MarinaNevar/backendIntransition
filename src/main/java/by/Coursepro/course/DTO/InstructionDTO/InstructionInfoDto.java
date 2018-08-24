@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class InstructionInfoDto {
-    private Long id;
+   // private Long id;
     private String name;
     private String description;
     private String publishDate;

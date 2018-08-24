@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Component
@@ -20,7 +21,7 @@ public class CommentAddTransformer {
         comment.setText(commentAddDto.getText());
         comment.setUser(userRepository.findByUsername(commentAddDto.getUsername()));
         comment.setInstruction(instructionRepository.findById(commentAddDto.getId_instruction()));
-        comment.setPublish_date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        comment.setPublish_date(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         return comment;
     }
 }

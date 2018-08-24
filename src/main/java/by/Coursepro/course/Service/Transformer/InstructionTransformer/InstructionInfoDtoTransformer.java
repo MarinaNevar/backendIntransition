@@ -14,7 +14,7 @@ public class InstructionInfoDtoTransformer {
 
     public InstructionInfoDto makeDto(Instruction instruction){
         InstructionInfoDto instructionInfo =new InstructionInfoDto();
-        instructionInfo.setId(instruction.getId());
+       // instructionInfo.setId(instruction.getId());
         instructionInfo.setDescription(instruction.getDescription());
         instructionInfo.setName(instruction.getName());
         instructionInfo.setPublishDate(instruction.getPublishDate());

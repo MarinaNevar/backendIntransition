@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
@@ -56,7 +57,7 @@ public class InstructionService {
 
     public void addInstruction(PublicInfoDto publicInfoDto){
         Instruction instr = publicationInfoDtoTransformer.makeModel(publicInfoDto);
-        instr.setPublishDate(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        instr.setPublishDate(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         instr.setSteps(publicInfoDto.getSteps());
         instr.setCategories(this.categoriesService.getCategories(publicInfoDto.getCategories()));
         this.instructionRepository.save(instr);
@@ -89,7 +90,7 @@ public class InstructionService {
 
     public void editInstruction(PublicInfoDto publicInfoDto){
         Instruction instruction = instructionEditDtoTransformer.makeEditModel(publicInfoDto);
-        instruction.setPublishDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        instruction.setPublishDate(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         instructionRepository.save(instruction);
     }
     public void deleteInstruction(long id){

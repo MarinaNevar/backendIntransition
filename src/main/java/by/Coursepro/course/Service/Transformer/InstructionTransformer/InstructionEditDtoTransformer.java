@@ -12,8 +12,8 @@ public class InstructionEditDtoTransformer {
     private final InstructionRepository instructionRepository;
 
 
-    public Instruction makeEditModel(PublicInfoDto publicInfoDto){
-        Instruction instr = instructionRepository.findById((long) publicInfoDto.getInstructionInfoDto().getId());
+  public Instruction makeEditModel(PublicInfoDto publicInfoDto){
+       Instruction instr = instructionRepository.findById((long) publicInfoDto.getId());
         instr.setName(publicInfoDto.getInstructionInfoDto().getName());
         instr.setDescription(publicInfoDto.getInstructionInfoDto().getDescription());
         instr.setCategories(publicInfoDto.getCategories());

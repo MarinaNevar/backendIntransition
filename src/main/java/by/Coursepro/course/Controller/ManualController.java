@@ -48,10 +48,10 @@ public class ManualController {
         this.instructionService.getInstructionByUserId(id);
     }
 
-    @PostMapping("/edit")
-    public void editInstr(@RequestBody PublicInfoDto publicInfoDto){
-        this.instructionService.editInstruction(publicInfoDto);
-    }
+//    @PostMapping("/edit")
+//    public void editInstr(@RequestBody PublicInfoDto publicInfoDto){
+//        this.instructionService.editInstruction(publicInfoDto);
+//    }
     @DeleteMapping("/deleteInstr/{idInstr}")
     public void deleteInstr(@RequestBody Long idInstr){
         this.instructionService.deleteInstruction(idInstr);

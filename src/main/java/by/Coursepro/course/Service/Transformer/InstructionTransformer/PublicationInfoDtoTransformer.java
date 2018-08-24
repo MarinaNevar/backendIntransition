@@ -21,13 +21,13 @@ public class PublicationInfoDtoTransformer {
 
     public Instruction makeModel(PublicInfoDto publicInfoDto){
         Instruction instruction=new Instruction();
-        instruction.setId(publicInfoDto.getInstructionInfoDto().getId());
-        instruction.setName(publicInfoDto.getInstructionInfoDto().getName());
-        instruction.setDescription(publicInfoDto.getInstructionInfoDto().getDescription());
-        User user = this.userRepository.findById(publicInfoDto.getInstructionInfoDto().getId_user());
-        instruction.setUserImage(user.getAvatar());
+       // instruction.setId(publicInfoDto.getInstructionInfoDto().getId());
+        instruction.setName(publicInfoDto.getName());
+        instruction.setDescription(publicInfoDto.getDescription());
+        User user = this.userRepository.findById(publicInfoDto.getId_user());
+       // instruction.setUserImage(user.getAvatar());
         instruction.setUser(user);
-        instruction.setRatingValue(publicInfoDto.getInstructionInfoDto().getValue_rating());
+        instruction.setRatingValue(publicInfoDto.getValue_rating());
         instruction.setSteps(publicInfoDto.getSteps());
         return instruction;
     }
