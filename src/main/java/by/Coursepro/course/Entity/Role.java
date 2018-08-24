@@ -1,5 +1,5 @@
 package by.Coursepro.course.Entity;
 
 public enum Role {
-    READER, WRITER, ADMIN;
+    ROLE_READER, ROLE_WRITER, ROLE_ADMIN;
 }

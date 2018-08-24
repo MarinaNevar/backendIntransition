@@ -2,7 +2,7 @@ package by.Coursepro.course.Service;
 
 import by.Coursepro.course.DTO.CommentDTO.CommentAddDto;
 import by.Coursepro.course.DTO.CommentDTO.CommentShowDto;
-import by.Coursepro.course.DTO.InstructionDTO.PublicInfoDto;
+import by.Coursepro.course.DTO.InstructionDTO.InstructionInfoDto;
 import by.Coursepro.course.DTO.LikeDTO.LikeDto;
 import by.Coursepro.course.DTO.RatingDTO.RatingSetDto;
 import by.Coursepro.course.DTO.StepDTO.StepAddDto;
@@ -22,7 +22,6 @@ import by.Coursepro.course.Service.Transformer.StepTransformer.StepShowDtoTransf
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -51,15 +50,15 @@ public class InstructionService {
     private final StepEditDtoTransformer stepEditDtoTransformer;
 
 
-    public List<PublicInfoDto> getInstructions(){
+    public List<InstructionInfoDto> getInstructions(){
         return publicationInfoDtoTransformer.makeListDto(instructionRepository.findAll());
     }
 
-    public void addInstruction(PublicInfoDto publicInfoDto){
-        Instruction instr = publicationInfoDtoTransformer.makeModel(publicInfoDto);
+    public void addInstruction(InstructionInfoDto instructionInfoDto){
+        Instruction instr = publicationInfoDtoTransformer.makeModel(instructionInfoDto);
         instr.setPublishDate(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
-        instr.setSteps(publicInfoDto.getSteps());
-        instr.setCategories(this.categoriesService.getCategories(publicInfoDto.getCategories()));
+        instr.setSteps(instructionInfoDto.getSteps());
+        instr.setCategories(this.categoriesService.getCategories(instructionInfoDto.getCategories()));
         this.instructionRepository.save(instr);
     }
 
@@ -81,15 +80,15 @@ public class InstructionService {
         return stepShowDtoTransformer.makeListDto(stepRepository.findAllByInstruction(instruction));
     }
 
-    public List<PublicInfoDto> getInstructionByUserId(long id){
+    public List<InstructionInfoDto> getInstructionByUserId(long id){
         return publicationInfoDtoTransformer.makeListDto(instructionRepository.findAllByUser(userRepository.findById(id)));
     }
-    public PublicInfoDto getPublicationById(long idPub){
+    public InstructionInfoDto getPublicationById(long idPub){
         return publicationInfoDtoTransformer.makeDto(instructionRepository.findById(idPub));
     }
 
-    public void editInstruction(PublicInfoDto publicInfoDto){
-        Instruction instruction = instructionEditDtoTransformer.makeEditModel(publicInfoDto);
+    public void editInstruction(InstructionInfoDto instructionInfoDto){
+        Instruction instruction = instructionEditDtoTransformer.makeEditModel(instructionInfoDto);
         instruction.setPublishDate(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         instructionRepository.save(instruction);
     }
@@ -173,7 +172,7 @@ public class InstructionService {
             user.setAmountLike(user.getAmountLike() - 1);
         }
     }
-    public Set<PublicInfoDto> getNewsByIdUsername(String username) {
+    public Set<InstructionInfoDto> getNewsByIdUsername(String username) {
         return publicationInfoDtoTransformer.makeSetDto(userRepository.findByUsername(username).getInstructions());
     }
 

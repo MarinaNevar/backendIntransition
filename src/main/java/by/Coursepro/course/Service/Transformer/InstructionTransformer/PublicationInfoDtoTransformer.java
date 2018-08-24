@@ -1,6 +1,6 @@
 package by.Coursepro.course.Service.Transformer.InstructionTransformer;
 
-import by.Coursepro.course.DTO.InstructionDTO.PublicInfoDto;
+import by.Coursepro.course.DTO.InstructionDTO.InstructionInfoDto;
 import by.Coursepro.course.Entity.Instruction;
 import by.Coursepro.course.Entity.User;
 import by.Coursepro.course.Repository.UserRepository;
@@ -19,35 +19,42 @@ public class PublicationInfoDtoTransformer {
     private final UserRepository userRepository;
     private final InstructionInfoDtoTransformer instructionInfoDtoTransformer;
 
-    public Instruction makeModel(PublicInfoDto publicInfoDto){
+    public Instruction makeModel(InstructionInfoDto instructionInfoDto){
         Instruction instruction=new Instruction();
-       // instruction.setId(publicInfoDto.getInstructionInfoDto().getId());
-        instruction.setName(publicInfoDto.getName());
-        instruction.setDescription(publicInfoDto.getDescription());
-        User user = this.userRepository.findById(publicInfoDto.getId_user());
-       // instruction.setUserImage(user.getAvatar());
-        instruction.setUser(user);
-        instruction.setRatingValue(publicInfoDto.getValue_rating());
-        instruction.setSteps(publicInfoDto.getSteps());
+        instruction.setId(instructionInfoDto.getId());
+        instruction.setName(instructionInfoDto.getName());
+        instruction.setDescription(instructionInfoDto.getDescription());
+        User user = this.userRepository.findById(instructionInfoDto.getId_user());
+        instruction.setUserImage(user.getAvatar());
+        instruction .setUser(user);
+        instruction.setRatingValue(instructionInfoDto.getValue_rating());
+        instruction.setSteps(instructionInfoDto.getSteps());
         return instruction;
     }
 
-    public PublicInfoDto makeDto(Instruction instruction){
-        PublicInfoDto publicInfoDto = new PublicInfoDto();
-        publicInfoDto.setInstructionInfoDto(instructionInfoDtoTransformer.makeDto(instruction));
-        publicInfoDto.setCategories(instruction.getCategories());
-        return publicInfoDto;
+    public InstructionInfoDto makeDto(Instruction instruction){
+        InstructionInfoDto instructionInfoDto = new InstructionInfoDto();
+        instructionInfoDto.setId_user(instruction.getUser().getId());
+        instructionInfoDto.setId(instruction.getId());
+        instructionInfoDto.setUserImage(instruction.getUserImage());
+        instructionInfoDto.setValue_rating(instruction.getRatingValue());
+        instructionInfoDto.setAuthorName(instruction.getAuthor());
+        instructionInfoDto.setPublishDate(instruction.getPublishDate());
+        instructionInfoDto.setDescription(instruction.getDescription());
+        instructionInfoDto.setName(instruction.getName());
+        instructionInfoDto.setCategories(instruction.getCategories());
+        return instructionInfoDto;
     }
-    public Set<PublicInfoDto> makeSetDto(Set<Instruction> instructionSet) {
-        Set<PublicInfoDto> newsInfoDtoSet = new HashSet<>();
+    public Set<InstructionInfoDto> makeSetDto(Set<Instruction> instructionSet) {
+        Set<InstructionInfoDto> newsInfoDtoSet = new HashSet<>();
         for(Instruction instr : instructionSet) {
             newsInfoDtoSet.add(makeDto(instr));
         }
         return newsInfoDtoSet;
     }
 
-    public List<PublicInfoDto> makeListDto(List<Instruction> instructionList){
-            List<PublicInfoDto> instructionInfoDtoList=new ArrayList<>();
+    public List<InstructionInfoDto> makeListDto(List<Instruction> instructionList){
+            List<InstructionInfoDto> instructionInfoDtoList=new ArrayList<>();
             for(Instruction instruction: instructionList){
                 instructionInfoDtoList.add(makeDto(instruction));
             }

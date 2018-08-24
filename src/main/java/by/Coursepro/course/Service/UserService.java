@@ -156,7 +156,7 @@ public class UserService {
         user.setDeleted(false);
         user.setLanguage(languageRepository.findById((long)1));
         user.setTheme(themeRepository.findById((long)1));
-        user.setRole(Role.READER);
+        user.setRole(Role.ROLE_ADMIN);
         user.setAvatar(Abbreviation.DEFAULT_IMAGE);
     }
 }

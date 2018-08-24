@@ -2,7 +2,7 @@ package by.Coursepro.course.Controller;
 
 import by.Coursepro.course.DTO.CommentDTO.CommentAddDto;
 import by.Coursepro.course.DTO.CommentDTO.CommentShowDto;
-import by.Coursepro.course.DTO.InstructionDTO.PublicInfoDto;
+import by.Coursepro.course.DTO.InstructionDTO.InstructionInfoDto;
 import by.Coursepro.course.DTO.LikeDTO.LikeDto;
 import by.Coursepro.course.DTO.RatingDTO.RatingSetDto;
 import by.Coursepro.course.DTO.StepDTO.StepAddDto;
@@ -30,12 +30,12 @@ public class ManualController {
     private final CategoriesService categoriesService;
 
     @GetMapping("/getAll")
-    public List<PublicInfoDto> getInstructions() {
+    public List<InstructionInfoDto> getInstructions() {
         return this.instructionService.getInstructions();
     }
 
     @PostMapping("/addInstr")
-    public void addInstr(@RequestBody PublicInfoDto instr) {
+    public void addInstr(@RequestBody InstructionInfoDto instr) {
         this.instructionService.addInstruction(instr);
     }
     @PostMapping("/addImageToPost")
@@ -48,10 +48,10 @@ public class ManualController {
         this.instructionService.getInstructionByUserId(id);
     }
 
-//    @PostMapping("/edit")
-//    public void editInstr(@RequestBody PublicInfoDto publicInfoDto){
-//        this.instructionService.editInstruction(publicInfoDto);
-//    }
+    @PostMapping("/edit")
+       public void editInstr(@RequestBody InstructionInfoDto publicInfoDto){
+       this.instructionService.editInstruction(publicInfoDto);
+    }
     @DeleteMapping("/deleteInstr/{idInstr}")
     public void deleteInstr(@RequestBody Long idInstr){
         this.instructionService.deleteInstruction(idInstr);

@@ -23,7 +23,7 @@ public class UserController {
     private final UserService userService;
 
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
     public List<UserListDto> findAll() {
         return this.userService.findAll();
@@ -39,12 +39,12 @@ public class UserController {
         return this.userService.getLanguage();
     }
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('WRITER') or hasRole('READER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_WRITER') or hasRole('ROLE_READER')")
     @PostMapping("/setUserLanguage/{username}")
     public void setUserLanguage(@PathVariable String username, @RequestBody Language language) {
         this.userService.setLanguage(username, language);
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/setUserRole/{idUser}")
     public void setUserRole(@PathVariable Long idUser,@RequestBody String role){
         this.userService.setRole(idUser,role);
@@ -55,7 +55,7 @@ public class UserController {
         return this.userService.findUserByUsername(username);
     }
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('WRITER') or hasRole('READER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_WRITER') or hasRole('ROLE_READER')")
     @PostMapping("/setUserTheme/{username}")
     public void setUserTheme(@PathVariable String username, @RequestBody Theme theme) {
         this.userService.setTheme(username, theme);
@@ -71,13 +71,13 @@ public class UserController {
         this.userService.setUsersImage(idUser, image);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{idUser}")
     public void deleteUser(@PathVariable Long idUser) {
         this.userService.deleteUser(idUser);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/block/{idUser}", method = RequestMethod.POST, produces = "application/json")
     public void blockUser(@PathVariable Long idUser, @RequestBody Map<String, String> blockStatus) {
         boolean blockedStatus = Boolean.parseBoolean(blockStatus.get("blocked"));

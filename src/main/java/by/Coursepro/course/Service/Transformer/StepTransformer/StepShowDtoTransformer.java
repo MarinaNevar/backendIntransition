@@ -1,9 +1,6 @@
 package by.Coursepro.course.Service.Transformer.StepTransformer;
 
-import by.Coursepro.course.DTO.CommentDTO.CommentShowDto;
-import by.Coursepro.course.DTO.InstructionDTO.PublicInfoDto;
 import by.Coursepro.course.DTO.StepDTO.StepShowDto;
-import by.Coursepro.course.Entity.Instruction;
 import by.Coursepro.course.Entity.Step;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

@@ -21,7 +21,7 @@ import java.util.UUID;
 public class CloudStorageService {
 
 
-    private static final String ACCESS_TOKEN = System.getenv("Ea8UzkLbjjAAAAAAAAAALuCHIYBRiuaFd2WIEp-7JaM1-KmTSjDqqLrmCdr4Yzem");
+    private static final String ACCESS_TOKEN = System.getenv("Bearer Ea8UzkLbjjAAAAAAAAAALuCHIYBRiuaFd2WIEp-7JaM1-KmTSjDqqLrmCdr4Yzem");
     private DbxClientV2 client;
 
     public String loadFileToDropbox(MultipartFile image) {
