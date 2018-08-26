@@ -34,12 +34,12 @@ public class PublicationInfoDtoTransformer {
 
     public InstructionInfoDto makeDto(Instruction instruction){
         InstructionInfoDto instructionInfoDto = new InstructionInfoDto();
-        instructionInfoDto.setId_user(instruction.getUser().getId());
-        instructionInfoDto.setId(instruction.getId());
-        instructionInfoDto.setUserImage(instruction.getUserImage());
+       // instructionInfoDto.setId_user(instruction.getUser().getId());
+       // instructionInfoDto.setId(instruction.getId());
+       // instructionInfoDto.setUserImage(instruction.getUserImage());
         instructionInfoDto.setValue_rating(instruction.getRatingValue());
         instructionInfoDto.setAuthorName(instruction.getAuthor());
-        instructionInfoDto.setPublishDate(instruction.getPublishDate());
+      //  instructionInfoDto.setPublishDate(instruction.getPublishDate());
         instructionInfoDto.setDescription(instruction.getDescription());
         instructionInfoDto.setName(instruction.getName());
         instructionInfoDto.setCategories(instruction.getCategories());

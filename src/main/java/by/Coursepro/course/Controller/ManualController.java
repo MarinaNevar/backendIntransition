@@ -84,6 +84,11 @@ public class ManualController {
     public void addStep(@RequestBody StepAddDto stepAddDto){
         this.instructionService.addStep(stepAddDto);
     }
+
+    @GetMapping("/getallby/{username}")
+    public List<InstructionInfoDto> getInstructionByUsername(@PathVariable String username){
+        return this.instructionService.getInstructionByUSername(username);
+    }
     @GetMapping("/getSteps/{idInstr}")
     public List<StepShowDto> getSteps(@PathVariable Long idInstr){
         return this.instructionService.getSteps(idInstr);
@@ -94,8 +99,8 @@ public class ManualController {
     }
 
     @GetMapping("/getAllCategories")
-    public Set<Category> getAllCategories(Set<Category> categories) {
-        return this.categoriesService.getCategories(categories);
+    public List<Category> getAllCategories() {
+        return this.categoriesService.getAllCategories();
     }
 
 

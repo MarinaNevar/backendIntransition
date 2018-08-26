@@ -27,9 +27,6 @@ public class Step {
     @NotNull
     @Column(name = "text")
     private String stepText;
-    @NotNull
-    @Column(name = "publish_date")
-    private String publishDate;
 
     @ManyToOne
     @JoinColumn(name = "id_instruction")

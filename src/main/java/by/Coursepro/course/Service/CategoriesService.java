@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -13,6 +14,10 @@ import java.util.Set;
 public class CategoriesService {
 
     private final CategoryRepository categoryRepository;
+
+    public List<Category> getAllCategories() {
+        return this.categoryRepository.findAll();
+    }
 
     public Set<Category> getCategories(Set<Category>categories){
         Set<Category> categorySet = new HashSet<>();

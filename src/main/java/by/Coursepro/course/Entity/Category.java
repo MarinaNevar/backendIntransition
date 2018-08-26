@@ -1,11 +1,13 @@
 package by.Coursepro.course.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -20,6 +22,9 @@ public class Category {
     @Column(name = "name",unique = true)
     private String name;
 
+    @ManyToMany(mappedBy = "categories")
+    @JsonBackReference(value = "instruction-category")
+    public Set<Instruction> instructions;
 
 
 }

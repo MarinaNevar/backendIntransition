@@ -58,7 +58,12 @@ public class InstructionService {
         Instruction instr = publicationInfoDtoTransformer.makeModel(instructionInfoDto);
         instr.setPublishDate(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         instr.setSteps(instructionInfoDto.getSteps());
+        instr.setRating(new HashSet<>());
+        instr.setComments(new HashSet<>());
+        instr.setAuthor(instr.getUser().getUsername());
         instr.setCategories(this.categoriesService.getCategories(instructionInfoDto.getCategories()));
+        this.instructionRepository.save(instr);
+        instr.getSteps().forEach((Step step) -> {step.setInstruction(instr);});
         this.instructionRepository.save(instr);
     }
 
@@ -67,12 +72,15 @@ public class InstructionService {
         Set<Step>steps=new HashSet<>(step.getSteps());
         steps.add(this.stepAddTransformer.makeModel(stepAddDto));
         this.instructionRepository.save(step);
+
+    }
+    public List<InstructionInfoDto> getInstructionByUSername(String username){
+        return publicationInfoDtoTransformer.makeListDto(instructionRepository.findAllByUser(userRepository.findByUsername(username)));
     }
 
 
     public void editStep(StepEditDto stepEditDto){
         Step step = stepEditDtoTransformer.makeEditModel(stepEditDto);
-        step.setPublishDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
         stepRepository.save(step);
     }
 

@@ -17,7 +17,6 @@ public class StepShowDtoTransformer {
         showDto.setName(step.getName());
         showDto.setText(step.getStepText());
         showDto.setNumber(step.getStepNumber());
-        showDto.setPublish_date(step.getPublishDate());
         return showDto;
     }
 

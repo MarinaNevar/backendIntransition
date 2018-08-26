@@ -32,6 +32,6 @@ public class Rating {
 
     @ManyToOne
     @JsonBackReference(value = "rating-instruction")
-    @JoinColumn(name = "id_news")
+    @JoinColumn(name = "id_instruction")
     private Instruction instruction;
 }

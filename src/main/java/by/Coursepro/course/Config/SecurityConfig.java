@@ -31,9 +31,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] allowedUrlsForPost = new String[]{ "/auth/**","/instructions/**", "/users/getThemes",
             "/users/getLanguages",
+            "users/setUserTheme/{username}",
             "/users/{username}",
             "/users/editImage/{username}",
-            "/users"};
+            "/users/getAll"};
 
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
     private final UserDetailsService userDetailsService;

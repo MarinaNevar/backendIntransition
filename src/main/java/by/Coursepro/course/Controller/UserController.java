@@ -23,8 +23,8 @@ public class UserController {
     private final UserService userService;
 
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping
+   // @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/getAll")
     public List<UserListDto> findAll() {
         return this.userService.findAll();
     }

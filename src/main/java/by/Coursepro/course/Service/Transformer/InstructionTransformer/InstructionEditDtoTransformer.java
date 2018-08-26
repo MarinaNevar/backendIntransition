@@ -13,7 +13,7 @@ public class InstructionEditDtoTransformer {
 
 
   public Instruction makeEditModel(InstructionInfoDto instructionInfoDto){
-       Instruction instr = instructionRepository.findById((long) instructionInfoDto.getId());
+       Instruction instr = instructionRepository.findById((long) instructionInfoDto.getId_user());
         instr.setName(instructionInfoDto.getName());
         instr.setDescription(instructionInfoDto.getDescription());
         instr.setCategories(instructionInfoDto.getCategories());
