@@ -36,7 +36,7 @@ public class Comment {
     @JoinColumn(name = "id_instruction")
     private Instruction instruction;
 
-    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
     @JsonBackReference
     protected Set<Like> likes;
 

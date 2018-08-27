@@ -5,10 +5,7 @@ import by.Coursepro.course.DTO.ErrorDto;
 import by.Coursepro.course.DTO.UserDTO.UserAddDto;
 import by.Coursepro.course.DTO.UserDTO.UserEditDto;
 import by.Coursepro.course.DTO.UserDTO.UserListDto;
-import by.Coursepro.course.Entity.Language;
-import by.Coursepro.course.Entity.Role;
-import by.Coursepro.course.Entity.Theme;
-import by.Coursepro.course.Entity.User;
+import by.Coursepro.course.Entity.*;
 import by.Coursepro.course.Repository.LanguageRepository;
 import by.Coursepro.course.Repository.ThemeRepository;
 import by.Coursepro.course.Repository.UserRepository;
@@ -22,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -156,7 +154,12 @@ public class UserService {
         user.setDeleted(false);
         user.setLanguage(languageRepository.findById((long)1));
         user.setTheme(themeRepository.findById((long)1));
-        user.setRole(Role.ROLE_ADMIN);
+        user.setRole(Role.ROLE_WRITER);
         user.setAvatar(Abbreviation.DEFAULT_IMAGE);
+        user.setAmountLike(0);
+        user.setComments(new HashSet<>());
+        user.setInstructions(new HashSet<>());
+        user.setRatings(new HashSet<>());
+        user.setLikes(new HashSet<>());
     }
 }

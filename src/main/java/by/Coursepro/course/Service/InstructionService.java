@@ -2,6 +2,7 @@ package by.Coursepro.course.Service;
 
 import by.Coursepro.course.DTO.CommentDTO.CommentAddDto;
 import by.Coursepro.course.DTO.CommentDTO.CommentShowDto;
+import by.Coursepro.course.DTO.InstructionDTO.InstrShowInfoDto;
 import by.Coursepro.course.DTO.InstructionDTO.InstructionInfoDto;
 import by.Coursepro.course.DTO.LikeDTO.LikeDto;
 import by.Coursepro.course.DTO.RatingDTO.RatingSetDto;
@@ -74,8 +75,9 @@ public class InstructionService {
         this.instructionRepository.save(step);
 
     }
-    public List<InstructionInfoDto> getInstructionByUSername(String username){
-        return publicationInfoDtoTransformer.makeListDto(instructionRepository.findAllByUser(userRepository.findByUsername(username)));
+    public List<InstrShowInfoDto> getInstructionByUsername(String username){
+        return publicationInfoDtoTransformer.makeShowList(instructionRepository.findAllByUser(userRepository.findByUsername(username)));
+
     }
 
 
@@ -88,8 +90,10 @@ public class InstructionService {
         return stepShowDtoTransformer.makeListDto(stepRepository.findAllByInstruction(instruction));
     }
 
+
+
     public List<InstructionInfoDto> getInstructionByUserId(long id){
-        return publicationInfoDtoTransformer.makeListDto(instructionRepository.findAllByUser(userRepository.findById(id)));
+        return publicationInfoDtoTransformer.makeListDto(instructionRepository.findAllByUser(userRepository.getOne(id)));
     }
     public InstructionInfoDto getPublicationById(long idPub){
         return publicationInfoDtoTransformer.makeDto(instructionRepository.findById(idPub));
@@ -102,14 +106,20 @@ public class InstructionService {
     }
     public void deleteInstruction(long id){
         Instruction deleteInstr = instructionRepository.findById(id);
+        Set<Step> deleteSteps = deleteInstr.getSteps();
+        deleteInstr.setSteps(null);
+        deleteSteps.forEach((Step step) -> {
+            step.setInstruction(null);
+            stepRepository.delete(step);
+        });
         deleteInstr.setCategories(null);
-        instructionRepository.save(deleteInstr);
+        //instructionRepository.save(deleteInstr);
         instructionRepository.delete(deleteInstr);
 
     }
     public void addComment(CommentAddDto commentAddDto){
         Instruction post = this.instructionRepository.findById(commentAddDto.getId_instruction());
-        Set<Comment> comments=new HashSet<>(post.getComments());
+        Set<Comment> comments = post.getComments();
         comments.add(this.commentAddTransformer.makeModel(commentAddDto));
         post.setComments(comments);
         this.instructionRepository.save(post);

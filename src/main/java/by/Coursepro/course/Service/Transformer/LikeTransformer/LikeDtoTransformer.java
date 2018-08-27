@@ -3,6 +3,7 @@ package by.Coursepro.course.Service.Transformer.LikeTransformer;
 import by.Coursepro.course.DTO.CommentDTO.CommentAddDto;
 import by.Coursepro.course.DTO.LikeDTO.LikeDto;
 import by.Coursepro.course.Entity.Comment;
+//import by.Coursepro.course.Entity.Like;
 import by.Coursepro.course.Entity.Like;
 import by.Coursepro.course.Repository.CommentRepository;
 import by.Coursepro.course.Repository.UserRepository;

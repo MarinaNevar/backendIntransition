@@ -2,6 +2,7 @@ package by.Coursepro.course.Controller;
 
 import by.Coursepro.course.DTO.CommentDTO.CommentAddDto;
 import by.Coursepro.course.DTO.CommentDTO.CommentShowDto;
+import by.Coursepro.course.DTO.InstructionDTO.InstrShowInfoDto;
 import by.Coursepro.course.DTO.InstructionDTO.InstructionInfoDto;
 import by.Coursepro.course.DTO.LikeDTO.LikeDto;
 import by.Coursepro.course.DTO.RatingDTO.RatingSetDto;
@@ -44,8 +45,13 @@ public class ManualController {
     }
 
     @GetMapping("/getedit/{id}")
-    public void getedit(@RequestBody long id){
-        this.instructionService.getInstructionByUserId(id);
+    public List<InstructionInfoDto> getedit(@PathVariable long id){
+       return this.instructionService.getInstructionByUserId(id);
+    }
+
+    @GetMapping("/getInstruction/{id}")
+    public InstructionInfoDto getInstruction(@PathVariable long id){
+        return this.instructionService.getPublicationById(id);
     }
 
     @PostMapping("/edit")
@@ -53,7 +59,7 @@ public class ManualController {
        this.instructionService.editInstruction(publicInfoDto);
     }
     @DeleteMapping("/deleteInstr/{idInstr}")
-    public void deleteInstr(@RequestBody Long idInstr){
+    public void deleteInstr(@PathVariable long idInstr){
         this.instructionService.deleteInstruction(idInstr);
     }
 
@@ -86,8 +92,8 @@ public class ManualController {
     }
 
     @GetMapping("/getallby/{username}")
-    public List<InstructionInfoDto> getInstructionByUsername(@PathVariable String username){
-        return this.instructionService.getInstructionByUSername(username);
+    public List<InstrShowInfoDto> getInstructionByUsername(@PathVariable String username){
+        return this.instructionService.getInstructionByUsername(username);
     }
     @GetMapping("/getSteps/{idInstr}")
     public List<StepShowDto> getSteps(@PathVariable Long idInstr){

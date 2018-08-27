@@ -1,9 +1,12 @@
 package by.Coursepro.course.Service.Transformer.InstructionTransformer;
 
+import by.Coursepro.course.DTO.InstructionDTO.InstrShowInfoDto;
 import by.Coursepro.course.DTO.InstructionDTO.InstructionInfoDto;
 import by.Coursepro.course.Entity.Instruction;
 import by.Coursepro.course.Entity.User;
+import by.Coursepro.course.Repository.StepRepository;
 import by.Coursepro.course.Repository.UserRepository;
+import io.swagger.models.auth.In;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +20,7 @@ import java.util.Set;
 public class PublicationInfoDtoTransformer {
 
     private final UserRepository userRepository;
+    private final StepRepository stepRepository;
     private final InstructionInfoDtoTransformer instructionInfoDtoTransformer;
 
     public Instruction makeModel(InstructionInfoDto instructionInfoDto){
@@ -32,18 +36,38 @@ public class PublicationInfoDtoTransformer {
         return instruction;
     }
 
+    public InstrShowInfoDto makeShowDto(Instruction instruction){
+        InstrShowInfoDto showDto = new InstrShowInfoDto();
+        showDto.setId(instruction.getId());
+        showDto.setName(instruction.getName());
+        showDto.setDescription(instruction.getName());
+        showDto.setPublishDate(instruction.getPublishDate());
+        showDto.setValue_rating(instruction.getRatingValue());
+        return showDto;
+    }
+
+
     public InstructionInfoDto makeDto(Instruction instruction){
         InstructionInfoDto instructionInfoDto = new InstructionInfoDto();
-       // instructionInfoDto.setId_user(instruction.getUser().getId());
-       // instructionInfoDto.setId(instruction.getId());
+        instructionInfoDto.setId_user(instruction.getUser().getId());
+        instructionInfoDto.setId(instruction.getId());
        // instructionInfoDto.setUserImage(instruction.getUserImage());
         instructionInfoDto.setValue_rating(instruction.getRatingValue());
         instructionInfoDto.setAuthorName(instruction.getAuthor());
       //  instructionInfoDto.setPublishDate(instruction.getPublishDate());
         instructionInfoDto.setDescription(instruction.getDescription());
         instructionInfoDto.setName(instruction.getName());
+        instructionInfoDto.setSteps(instruction.getSteps());
         instructionInfoDto.setCategories(instruction.getCategories());
         return instructionInfoDto;
+    }
+
+    public List<InstrShowInfoDto> makeShowList(List<Instruction> instructionList){
+        List<InstrShowInfoDto> instrShow=new ArrayList<>();
+        for(Instruction instruction: instructionList){
+            instrShow.add(makeShowDto(instruction));
+        }
+        return instrShow;
     }
     public Set<InstructionInfoDto> makeSetDto(Set<Instruction> instructionSet) {
         Set<InstructionInfoDto> newsInfoDtoSet = new HashSet<>();
