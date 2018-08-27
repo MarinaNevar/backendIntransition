@@ -158,7 +158,7 @@ public class InstructionService {
         userRepository.save(user);
     }
     public float setPostRating(RatingSetDto ratingSetDto){
-        Instruction instr = instructionRepository.findById(ratingSetDto.getIdPost());
+        Instruction instr = instructionRepository.findById(ratingSetDto.getIdInstruction());
         Boolean newRating = true;
         for(Rating rating : instr.getRating()) {
             if(rating.getUser().getUsername().equals(ratingSetDto.getUsername())) {

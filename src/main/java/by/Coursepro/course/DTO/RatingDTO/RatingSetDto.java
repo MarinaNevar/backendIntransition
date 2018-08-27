@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class RatingSetDto {
     private String username;
-    private long idPost;
+    private long idInstruction;
     private int rating;
 }

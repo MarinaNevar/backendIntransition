@@ -17,7 +17,7 @@ public class RatingSetDtoTransformer {
     public Rating makeModel(RatingSetDto ratingSetDto){
         Rating rating = new Rating();
         rating.setUser(userRepository.findByUsername(ratingSetDto.getUsername()));
-        rating.setInstruction(instructionRepository.findById(ratingSetDto.getIdPost()));
+        rating.setInstruction(instructionRepository.findById(ratingSetDto.getIdInstruction()));
         rating.setValue(ratingSetDto.getRating());
         return rating;
     }
