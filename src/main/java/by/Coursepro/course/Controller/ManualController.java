@@ -49,7 +49,7 @@ public class ManualController {
        return this.instructionService.getInstructionByUserId(id);
     }
 
-    @GetMapping("/getInstruction/{id}")
+    @GetMapping("/{id}")
     public InstructionInfoDto getInstruction(@PathVariable long id){
         return this.instructionService.getPublicationById(id);
     }
@@ -58,7 +58,7 @@ public class ManualController {
        public void editInstr(@RequestBody InstructionInfoDto publicInfoDto){
        this.instructionService.editInstruction(publicInfoDto);
     }
-    @DeleteMapping("/deleteInstr/{idInstr}")
+    @DeleteMapping("/deleteInstruction/{idInstr}")
     public void deleteInstr(@PathVariable long idInstr){
         this.instructionService.deleteInstruction(idInstr);
     }
@@ -91,7 +91,7 @@ public class ManualController {
         this.instructionService.addStep(stepAddDto);
     }
 
-    @GetMapping("/getallby/{username}")
+    @GetMapping("/allInstructions/{username}")
     public List<InstrShowInfoDto> getInstructionByUsername(@PathVariable String username){
         return this.instructionService.getInstructionByUsername(username);
     }

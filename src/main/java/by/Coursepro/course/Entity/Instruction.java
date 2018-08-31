@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -78,7 +79,7 @@ public class Instruction {
 
     @OneToMany(mappedBy = "instruction", cascade = CascadeType.ALL)
     @JsonBackReference(value = "instruction-step")
-    private Set<Step> steps;
+    private List<Step> steps;
 
     public Instruction(String name, String description, String text,String author, Float ratingValue) {
         this.name = name;

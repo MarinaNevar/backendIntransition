@@ -15,7 +15,7 @@ public class StepShowDtoTransformer {
     public StepShowDto makeDto(Step step){
         StepShowDto showDto = new StepShowDto();
         showDto.setName(step.getName());
-        showDto.setText(step.getStepText());
+        showDto.setText(step.getText());
         showDto.setNumber(step.getStepNumber());
         return showDto;
     }

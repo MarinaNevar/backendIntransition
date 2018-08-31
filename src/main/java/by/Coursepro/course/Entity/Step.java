@@ -26,7 +26,7 @@ public class Step {
     private String name;
     @NotNull
     @Column(name = "text")
-    private String stepText;
+    private String text;
 
     @ManyToOne
     @JoinColumn(name = "id_instruction")

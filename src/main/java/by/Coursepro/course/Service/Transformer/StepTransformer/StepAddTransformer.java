@@ -16,7 +16,7 @@ public class StepAddTransformer {
         Step step = new Step();
         step.setName(stepAddDto.getName());
         step.setStepNumber(stepAddDto.getNumber());
-        step.setStepText(stepAddDto.getText());
+        step.setText(stepAddDto.getText());
         step.setInstruction(this.instructionRepository.findById(stepAddDto.getId_instruction()));
         return step;
     }

@@ -5,6 +5,7 @@ import by.Coursepro.course.Entity.Step;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 @Getter
 @Setter
@@ -18,5 +19,5 @@ public class InstructionInfoDto {
     private float value_rating;
     private String authorName;
     private Set<Category> categories;
-    private Set<Step> steps;
+    private List<Step> steps;
 }

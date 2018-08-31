@@ -15,7 +15,7 @@ public class StepEditDtoTransformer {
     public Step makeEditModel(StepEditDto stepEditDto){
         Step step = stepRepository.findById((long) stepEditDto.getId());
         step.setName(stepEditDto.getName());
-        step.setStepText(stepEditDto.getText());
+        step.setText(stepEditDto.getText());
         return step;
     }
 }

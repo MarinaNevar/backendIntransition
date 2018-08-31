@@ -106,7 +106,7 @@ public class InstructionService {
     }
     public void deleteInstruction(long id){
         Instruction deleteInstr = instructionRepository.findById(id);
-        Set<Step> deleteSteps = deleteInstr.getSteps();
+        List<Step> deleteSteps = deleteInstr.getSteps();
         deleteInstr.setSteps(null);
         deleteSteps.forEach((Step step) -> {
             step.setInstruction(null);

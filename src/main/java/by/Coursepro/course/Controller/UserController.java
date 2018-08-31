@@ -90,6 +90,7 @@ public class UserController {
 
     @GetMapping("/unique/{username}")
     public boolean uniqueUsername(@PathVariable String username) {
+
         return this.userService.uniqueUsername(username);
     }
 

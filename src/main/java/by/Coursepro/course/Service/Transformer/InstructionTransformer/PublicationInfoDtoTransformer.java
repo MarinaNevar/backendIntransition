@@ -28,8 +28,9 @@ public class PublicationInfoDtoTransformer {
         instruction.setId(instructionInfoDto.getId());
         instruction.setName(instructionInfoDto.getName());
         instruction.setDescription(instructionInfoDto.getDescription());
+        instruction.setCategories(instructionInfoDto.getCategories());
         User user = this.userRepository.findById(instructionInfoDto.getId_user());
-        instruction.setUserImage(user.getAvatar());
+        //instruction.setUserImage(user.getAvatar());
         instruction .setUser(user);
         instruction.setRatingValue(instructionInfoDto.getValue_rating());
         instruction.setSteps(instructionInfoDto.getSteps());
@@ -40,7 +41,7 @@ public class PublicationInfoDtoTransformer {
         InstrShowInfoDto showDto = new InstrShowInfoDto();
         showDto.setId(instruction.getId());
         showDto.setName(instruction.getName());
-        showDto.setDescription(instruction.getName());
+        showDto.setDescription(instruction.getDescription());
         showDto.setPublishDate(instruction.getPublishDate());
         showDto.setValue_rating(instruction.getRatingValue());
         return showDto;
